@@ -7,8 +7,123 @@
 <meta name="description" content="Vexa وكالة رقمية متخصصة في تصميم وتطوير المواقع والهويات البصرية. جودة عالمية، تسليم سريع، أسعار واضحة.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&family=Tajawal:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
+
+  #signup {
+    background: var(--off-black);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .signup-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    background: var(--dark);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 2.5rem;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .form-group label {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.03em;
+  }
+  .form-group input, .form-group select {
+    background: var(--off-black);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    padding: 0.85rem 1rem;
+    color: var(--white);
+    font-family: var(--font-ar);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+  .form-group select { cursor: pointer; }
+
+  @media (max-width: 768px) {
+    .signup-container { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  .partner-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.72rem;
+    color: var(--gold);
+    border: 1px solid rgba(201,169,110,0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.04em;
+  }
+  .partner-badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: inline-block;
+    animation: pulse-orb 2s ease-in-out infinite;
+  }
+  .collab-x {
+    color: rgba(255,255,255,0.3);
+    font-style: normal;
+    font-weight: 300;
+  }
+  .collab-logos {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .collab-logo-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 150px;
+    height: 150px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.02);
+    text-align: center;
+  }
+  .collab-logo-box .collab-logo-text {
+    font-family: var(--font-en);
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+  }
+  .collab-logo-box .collab-logo-sub {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+  }
+  .collab-logo-ai {
+    border-color: rgba(201,169,110,0.4);
+    background: radial-gradient(circle at 40% 30%, rgba(201,169,110,0.15), transparent 70%);
+  }
+  .collab-logo-ai .collab-logo-text { color: var(--gold); font-size: 1.1rem; }
+  .collab-logo-ai .collab-orb-icon { font-size: 1.8rem; line-height: 1; }
+  .collab-x-icon {
+    font-size: 1.4rem;
+    color: rgba(255,255,255,0.25);
+    font-family: var(--font-en);
+  }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
@@ -25,18 +140,21 @@
     --gold-pale: #f5edd9;
     --white: #ffffff;
     --cream: #faf8f4;
-    --font-ar: 'IBM Plex Sans Arabic', sans-serif;
+  --font-ar: 'IBM Plex Sans Arabic', sans-serif;
     --font-en: 'Playfair Display', serif;
+    --font-heading: 'Tajawal', sans-serif;
   }
 
   html { scroll-behavior: smooth; }
 
-  body {
+body {
     font-family: var(--font-ar);
     background: var(--black);
     color: var(--white);
     line-height: 1.7;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   /* NAV */
@@ -126,12 +244,12 @@
     font-weight: 500;
   }
 
-  .hero h1 {
-    font-family: var(--font-ar);
+.hero h1 {
+    font-family: var(--font-heading);
     font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 300;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
     color: var(--white);
     max-width: 900px;
     margin-bottom: 1.5rem;
@@ -140,7 +258,7 @@
   .hero h1 em {
     font-style: normal;
     color: var(--gold);
-    font-weight: 500;
+    font-weight: 800;
   }
 
   .hero-sub {
@@ -240,12 +358,13 @@
     font-weight: 500;
   }
 
-  .section-title {
+.section-title {
+    font-family: var(--font-heading);
     font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 300;
-    line-height: 1.2;
+    font-weight: 800;
+    line-height: 1.1;
     margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
   }
 
   .section-title em {
@@ -274,20 +393,26 @@
     margin: 0 auto 4rem;
   }
 
-  .services-grid {
+.services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);
   }
 
-  .service-card {
+  @media (max-width: 1100px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+.service-card {
     background: var(--off-black);
     padding: 2.5rem;
     transition: background 0.3s;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
   }
 
   .service-card::after {
@@ -326,11 +451,12 @@
     font-weight: 300;
   }
 
-  .service-meta {
+.service-meta {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-top: 1.5rem;
+    margin-top: auto;
     border-top: 1px solid var(--border);
   }
 
@@ -365,11 +491,10 @@
     gap: 1rem;
   }
 
-  .works-grid {
+.works-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
+    gap: 1.25rem;
   }
 
   .work-item {
@@ -381,6 +506,14 @@
     display: block;
     text-decoration: none;
     color: inherit;
+    border: 1px solid var(--border-light);
+    border-radius: 10px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .work-item:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
   }
 
   .work-item.large {
@@ -1068,6 +1201,8 @@
     .collab-visual { justify-content: flex-start; }
     body.banner-visible .hero { padding-top: 9rem; }
   }
+
+  
 </style>
 </head>
 <body>
@@ -1096,7 +1231,6 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">استوديو تصميم وتطوير رقمي</div>
   <h1>تصميم يستحق<br><em>ثقتك</em></h1>
   <p class="hero-sub">
     نبني مواقع وهويات بصرية تعكس قيمة علامتك التجارية الحقيقية — بجودة تنافس أكبر الوكالات العالمية، وتسليم مضمون يبدأ من 24 ساعة.
@@ -1304,9 +1438,13 @@
 <section class="collab-section fade-up" id="collab">
   <div class="collab-inner">
     <div>
+      <div class="partner-badge">
+        <span class="partner-badge-dot"></span>
+        شراكة رسمية مع شركة عالمية في الذكاء الاصطناعي
+      </div>
       <div class="section-eyebrow">شراكة استراتيجية</div>
-      <h2 class="section-title" style="font-size: clamp(1.8rem, 3.5vw, 2.8rem);">مواقعك مدعومة<br>بـ <em>أتمتة AI</em></h2>
-      <p class="section-sub" style="margin-top: 1rem;">تعاونّا مع شريكنا المتخصص في أتمتة الأعمال بالذكاء الاصطناعي — لتحصل على موقعك مدمجًا بـ chatbots وردود تلقائية وتكاملات ذكية تعمل 24/7 بدونك.</p>
+      <h2 class="section-title" style="font-size: clamp(1.8rem, 3.5vw, 2.8rem);">Vexa <span class="collab-x">×</span> <em>AxonFlow AI</em></h2>
+      <p class="section-sub" style="margin-top: 1rem;">بالتعاون مع <strong style="color:var(--white)">AxonFlow</strong> — شركتنا الشريكة العالمية المتخصصة في أتمتة الأعمال بالذكاء الاصطناعي — نقدّم لك موقعًا مدمجًا بـ chatbots وردود تلقائية وتكاملات ذكية تعمل 24/7 بدونك.</p>
       <div class="collab-tags">
         <span class="collab-tag">AI Chatbot</span>
         <span class="collab-tag">Auto-Reply</span>
@@ -1315,12 +1453,21 @@
         <span class="collab-tag">WhatsApp Bot</span>
       </div>
       <a href="https://axonflow-1.vercel.app/" class="collab-link" target="_blank" rel="noopener">
-        اكتشف الشراكة ←
+        تعرّف على AxonFlow AI ←
       </a>
     </div>
     <div class="collab-visual">
-      <div class="collab-orb">
-        <span class="collab-orb-icon">⚡</span>
+      <div class="collab-logos">
+        <div class="collab-logo-box">
+          <span class="collab-logo-text">Vexa</span>
+          <span class="collab-logo-sub">Web Studio</span>
+        </div>
+        <div class="collab-x-icon">×</div>
+        <div class="collab-logo-box collab-logo-ai">
+          <span class="collab-orb-icon">⚡</span>
+          <span class="collab-logo-text">AxonFlow</span>
+          <span class="collab-logo-sub">AI Automation</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1461,6 +1608,38 @@
   </div>
 </section>
 
+<!-- SIGNUP -->
+<section id="signup">
+  <div class="signup-container fade-up">
+    <div>
+      <div class="section-eyebrow">ابدأ الآن</div>
+      <h2 class="section-title">سجّل بياناتك<br>و<em>هنرجع لك</em></h2>
+      <p class="section-sub" style="margin-top: 1rem;">اكتب بياناتك وهنتواصل معاك في أقرب وقت لمناقشة تفاصيل مشروعك.</p>
+    </div>
+    <form class="signup-form" onsubmit="submitSignup(event)">
+      <div class="form-group">
+        <label for="signupName">الاسم</label>
+        <input type="text" id="signupName" required placeholder="اسمك بالكامل">
+      </div>
+      <div class="form-group">
+        <label for="signupPhone">رقم الواتساب</label>
+        <input type="tel" id="signupPhone" required placeholder="01XXXXXXXXX">
+      </div>
+      <div class="form-group">
+        <label for="signupService">الخدمة المطلوبة</label>
+        <select id="signupService">
+          <option>صفحة هبوط</option>
+          <option>موقع شركة / عيادة / مطعم</option>
+          <option>هوية بصرية</option>
+          <option>متجر إلكتروني / MVP</option>
+          <option>غير ذلك</option>
+        </select>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%; justify-content:center; border:none; cursor:pointer;">إرسال البيانات ←</button>
+    </form>
+  </div>
+</section>
+
 <!-- CTA -->
 <section id="cta">
   <div class="cta-content fade-up">
@@ -1489,6 +1668,34 @@
 </footer>
 
 <script>
+
+// ===== الكود النهائي لدالة submitSignup =====
+// استبدل دالة submitSignup القديمة في ملف HTML بهذا الكود بالكامل
+ 
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzH5JStCdpWplH19wzrcS5775JW29vF-mnIsxRn2ufg29zIkRo9MvZWhL0yo7fHn_Ql5Q/exec";
+ 
+function submitSignup(e) {
+  e.preventDefault();
+  
+  const name = document.getElementById('signupName').value;
+  const phone = document.getElementById('signupPhone').value;
+  const service = document.getElementById('signupService').value;
+  
+  // إرسال البيانات لـ Google Sheets (في الخلفية)
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors', // ضروري مع Apps Script
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name, phone, service })
+  }).catch(err => console.error('Error saving to sheet:', err));
+  
+  // فتح واتساب مباشرة (زي ما كان شغال قبل كده)
+  const text = `مرحبًا Vexa، أنا ${name}، رقمي ${phone}، وأريد خدمة: ${service}`;
+  window.open('https://wa.me/201032054326?text=' + encodeURIComponent(text), '_blank');
+}
+
 function toggleFaq(el) {
   const item = el.parentElement;
   const isOpen = item.classList.contains('open');
